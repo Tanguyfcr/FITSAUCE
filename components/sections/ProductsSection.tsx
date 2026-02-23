@@ -26,7 +26,7 @@ export default function ProductsSection({ products }: Props) {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
         {products.map((p, i) => (
-          <ProductCard key={p.id} product={p} onAdd={addToCart} featured={i === 0} />
+          <ProductCard key={p.id} product={p} onAdd={addToCart} featured={false} />
         ))}
       </div>
     </section>
