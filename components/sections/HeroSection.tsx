@@ -70,19 +70,17 @@ export default function HeroSection() {
         </div>
 
         {/* 2. HAUT DROITE : Image (s'aligne sur la hauteur du titre) */}
-        <div style={{ paddingBottom: "clamp(20px, 3vw, 40px)" }}>
-          <div style={{
-            background: "rgba(0,0,0,0.04)",
-            borderRadius: 4,
-            border: "1px dashed var(--faint)",
-            height: "100%", // Remplit toute la cellule de la grille
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "200px"
-          }}>
-            <p className="label" style={{ color: "var(--faint)" }}>Image / Vidéo</p>
-          </div>
+<img
+  src="/images/hero.jpg.png"
+  alt="FitSauce"
+  style={{
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: 4,
+    minHeight: "200px",
+  }}
+/>
         </div>
 
         {/* 3. BAS GAUCHE : Description + Boutons (avec le trait) */}
