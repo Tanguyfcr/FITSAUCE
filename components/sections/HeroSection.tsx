@@ -102,29 +102,27 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="f4" style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4,auto)",
-            marginTop: "clamp(36px,4vw,52px)",
-            paddingTop: "clamp(24px,2.5vw,28px)",
-            borderTop: "1px solid var(--faint)",
-            alignItems: "start",
-          }}>
-            {STATS.map((s, i) => (
-              <div key={i} style={{ display: "contents" }}>
-                <div style={{ paddingRight: 24, paddingLeft: i === 0 ? 0 : 24 }}>
-                  <p className="d" style={{ fontSize: "clamp(24px,2.5vw,34px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>
-                    {s.value}
-                  </p>
-                  <p className="label" style={{ marginTop: 4, fontSize: "clamp(7px,0.7vw,8px)", lineHeight: 1.4 }}>
-                    {s.label}
-                  </p>
-                </div>
-                {i < 3 && <div className="stat-sep" />}
-              </div>
-            ))}
-          </div>
+          {/* Stats sous l'image */}
+<div className="f4" style={{ display: "grid", gridTemplateColumns: "repeat(4,auto)", paddingTop: 20, borderTop: "1px solid var(--faint)", alignItems: "start" }}>
+  {STATS.map((s, i) => (
+    <div key={i} style={{ display: "contents" }}>
+      <div style={{ paddingRight: 20, paddingLeft: i === 0 ? 0 : 20 }}>
+        <p className="d" style={{ fontSize: "clamp(22px,2vw,30px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>{s.value}</p>
+        <p className="label" style={{ marginTop: 4, fontSize: 7, lineHeight: 1.4 }}>{s.label}</p>
+      </div>
+      {i < 3 && <div className="stat-sep" />}
+    </div>
+  ))}
+</div>
+
+{/* Chips sport */}
+<div className="f5" style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginTop: 16 }}>
+  <Activity size={12} color="var(--orange)" />
+  <p className="label">Optimised for:</p>
+  {TRAINING_CHIPS.map((t) => (
+    <span key={t} className="chip chip-outline" style={{ fontSize: 7.5 }}>{t}</span>
+  ))}
+</div>
 
           {/* Chips sport */}
           <div className="f5" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 20, flexWrap: "wrap" }}>
