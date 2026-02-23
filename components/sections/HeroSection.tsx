@@ -17,14 +17,14 @@ const TRAINING_CHIPS = ["Running", "Strength", "Hyrox", "Endurance"];
 export default function HeroSection() {
   return (
     <section style={{
-      minHeight: "70vh",
       display: "flex",
-      alignItems: "center",
+      alignItems: "stretch",
       padding: "0 clamp(20px, 4vw, 40px)",
       paddingTop: "clamp(90px, 12vw, 110px)",
       paddingBottom: "clamp(60px, 8vw, 80px)",
       position: "relative",
       overflow: "hidden",
+      minHeight: "70vh",
     }}>
 
       {/* Grille de fond */}
@@ -43,42 +43,44 @@ export default function HeroSection() {
         background: "var(--orange)",
       }} />
 
-      {/* Grille 2 colonnes */}
+      {/* Grille 2 colonnes — stretch pour que les deux colonnes aient la même hauteur */}
       <div className="max-page" style={{
         position: "relative", zIndex: 1,
         width: "100%",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gap: 60,
-        alignItems: "start",
+        alignItems: "stretch",
       }}>
 
         {/* ── Colonne GAUCHE — texte principal ── */}
-        <div>
+        {/* display:flex + flexDirection:column + justifyContent:space-between
+            pousse les boutons vers le bas naturellement */}
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
 
-          {/* Status pill */}
-          <div className="f1" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "clamp(20px,3vw,28px)" }}>
-            <span className="blink" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--orange)", display: "inline-block", flexShrink: 0 }} />
-            <span className="label" style={{ fontSize: "clamp(8px,1vw,9px)" }}>
-              Mediterranean Performance Nutrition — System Online
-            </span>
+          <div>
+            {/* Status pill */}
+            <div className="f1" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "clamp(20px,3vw,28px)" }}>
+              <span className="blink" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--orange)", display: "inline-block", flexShrink: 0 }} />
+              <span className="label" style={{ fontSize: "clamp(8px,1vw,9px)" }}>
+                Mediterranean Performance Nutrition — System Online
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="d f2" style={{
+              fontSize: "clamp(48px,7vw,110px)",
+              color: "var(--ink)",
+              lineHeight: 0.88,
+            }}>
+              PROTEIN.<br />
+              OLIVE OIL.<br />
+              <span style={{ color: "var(--orange)" }}>RESULTS.</span>
+            </h1>
           </div>
 
-          {/* Headline */}
-          <h1 className="d f2" style={{
-            fontSize: "clamp(48px,7vw,110px)",
-            color: "var(--ink)",
-            lineHeight: 0.88,
-            marginBottom: 0,
-          }}>
-            PROTEIN.<br />
-            OLIVE OIL.<br />
-            <span style={{ color: "var(--orange)" }}>RESULTS.</span>
-          </h1>
-
-          {/* Description + boutons */}
+          {/* Description + boutons — poussés en bas par space-between */}
           <div className="f3" style={{
-            marginTop: "clamp(24px,3vw,32px)",
             paddingTop: "clamp(20px,2.5vw,28px)",
             borderTop: "1px solid var(--faint)",
           }}>
@@ -104,54 +106,65 @@ export default function HeroSection() {
 
         </div>
 
-        {/* ── Colonne DROITE — image/vidéo + stats en dessous ── */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        {/* ── Colonne DROITE — image/vidéo + stats ── */}
+        {/* display:grid avec 2 rangées :
+            - 1fr = l'image prend tout l'espace disponible
+            - auto = les stats prennent juste ce qu'elles ont besoin */}
+        <div style={{
+          display: "grid",
+          gridTemplateRows: "1fr auto",
+          gap: 16,
+        }}>
 
-          {/* Espace image/vidéo */}
+          {/* Espace image/vidéo — s'étire pour remplir la rangée 1fr */}
           <div style={{
-            height: "clamp(300px,35vw,440px)",
             background: "rgba(0,0,0,0.04)",
             borderRadius: 4,
             border: "1px dashed var(--faint)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            minHeight: "150px",
           }}>
             <p className="label" style={{ color: "var(--faint)" }}>Image / Vidéo</p>
           </div>
 
-          {/* Stats sous l'image */}
-          <div className="f4" style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4,auto)",
-            paddingTop: "clamp(20px,2vw,24px)",
-            borderTop: "1px solid var(--faint)",
-            alignItems: "start",
-          }}>
-            {STATS.map((s, i) => (
-              <div key={i} style={{ display: "contents" }}>
-                <div style={{ paddingRight: 20, paddingLeft: i === 0 ? 0 : 20 }}>
-                  <p className="d" style={{ fontSize: "clamp(22px,2vw,30px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>
-                    {s.value}
-                  </p>
-                  <p className="label" style={{ marginTop: 4, fontSize: "clamp(7px,0.7vw,8px)", lineHeight: 1.4 }}>
-                    {s.label}
-                  </p>
+          {/* Stats + chips — rangée auto, s'aligne naturellement avec les boutons */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+
+            {/* Stats */}
+            <div className="f4" style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4,auto)",
+              paddingTop: 12,
+              borderTop: "1px solid var(--faint)",
+              alignItems: "start",
+            }}>
+              {STATS.map((s, i) => (
+                <div key={i} style={{ display: "contents" }}>
+                  <div style={{ paddingRight: 16, paddingLeft: i === 0 ? 0 : 16 }}>
+                    <p className="d" style={{ fontSize: "clamp(20px,2vw,28px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>
+                      {s.value}
+                    </p>
+                    <p className="label" style={{ marginTop: 4, fontSize: "clamp(7px,0.7vw,8px)", lineHeight: 1.4 }}>
+                      {s.label}
+                    </p>
+                  </div>
+                  {i < 3 && <div className="stat-sep" />}
                 </div>
-                {i < 3 && <div className="stat-sep" />}
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          {/* Chips sport */}
-          <div className="f5" style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-            <Activity size={12} color="var(--orange)" />
-            <p className="label" style={{ fontSize: "clamp(7.5px,0.8vw,8px)" }}>Optimised for:</p>
-            {TRAINING_CHIPS.map((t) => (
-              <span key={t} className="chip chip-outline" style={{ fontSize: 7.5 }}>{t}</span>
-            ))}
-          </div>
+            {/* Chips sport */}
+            <div className="f5" style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+              <Activity size={12} color="var(--orange)" />
+              <p className="label" style={{ fontSize: "clamp(7.5px,0.8vw,8px)" }}>Optimised for:</p>
+              {TRAINING_CHIPS.map((t) => (
+                <span key={t} className="chip chip-outline" style={{ fontSize: 7.5 }}>{t}</span>
+              ))}
+            </div>
 
+          </div>
         </div>
 
       </div>
