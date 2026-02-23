@@ -19,7 +19,7 @@ const TRAINING_CHIPS = ["Running", "Strength", "Hyrox", "Endurance"];
 export default function HeroSection() {
   return (
     <section style={{
-      minHeight: "100vh",
+      minHeight: "70vh",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -46,7 +46,7 @@ export default function HeroSection() {
         background: "var(--orange)",
       }} />
 
-      <div className="max-page" style={{ position: "relative", zIndex: 1 }}>
+      <div className="max-page" style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}>
 
         {/* Status pill animé */}
         <div className="f1" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "clamp(20px,3vw,28px)" }}>
@@ -63,7 +63,7 @@ export default function HeroSection() {
         <h1
           className="d f2"
           style={{
-            fontSize: "clamp(72px,13vw,200px)",
+            fontSize: "clamp(48px,7vw,110px)",
             color: "var(--ink)",
             lineHeight: 0.88,
             marginBottom: 0,
