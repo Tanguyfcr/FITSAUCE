@@ -44,8 +44,8 @@ export default function HeroSection() {
         position: "relative", zIndex: 1,
         width: "100%",
         display: "grid",
-        gridTemplateColumns: "1fr 1fr", // Deux colonnes égales
-        gridTemplateRows: "1fr auto",   // Ligne 1 (Titre/Image) s'étire, Ligne 2 (Bas) s'adapte
+        gridTemplateColumns: "1fr 1fr",
+        gridTemplateRows: "1fr auto",
         columnGap: 60,
       }}>
 
@@ -69,21 +69,23 @@ export default function HeroSection() {
           </h1>
         </div>
 
-        {/* 2. HAUT DROITE : Image (s'aligne sur la hauteur du titre) */}
-<img
-  src="/images/hero.jpg.png"
-  alt="FitSauce"
-  style={{
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    borderRadius: 4,
-    minHeight: "200px",
-  }}
-/>
+        {/* 2. HAUT DROITE : Image */}
+        <div style={{ paddingBottom: "clamp(20px, 3vw, 40px)" }}>
+          <img
+            src="/images/hero.png"
+            alt="FitSauce"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: 4,
+              minHeight: "200px",
+              display: "block",
+            }}
+          />
         </div>
 
-        {/* 3. BAS GAUCHE : Description + Boutons (avec le trait) */}
+        {/* 3. BAS GAUCHE : Description + Boutons */}
         <div style={{
           paddingTop: "clamp(20px, 2.5vw, 28px)",
           borderTop: "1px solid var(--faint)",
@@ -108,7 +110,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* 4. BAS DROITE : Stats + Chips (avec le trait aligné) */}
+        {/* 4. BAS DROITE : Stats + Chips */}
         <div style={{
           paddingTop: "clamp(20px, 2.5vw, 28px)",
           borderTop: "1px solid var(--faint)",
