@@ -1,7 +1,5 @@
 "use client";
 
-// components/sections/HeroSection.tsx
-
 import Link from "next/link";
 import { ArrowRight, Activity } from "lucide-react";
 
@@ -18,13 +16,11 @@ export default function HeroSection() {
   return (
     <section style={{
       display: "flex",
-      alignItems: "stretch",
       padding: "0 clamp(20px, 4vw, 40px)",
       paddingTop: "clamp(90px, 12vw, 110px)",
       paddingBottom: "clamp(60px, 8vw, 80px)",
       position: "relative",
-      overflow: "hidden",
-      minHeight: "70vh",
+      minHeight: "80vh",
     }}>
 
       {/* Grille de fond */}
@@ -43,127 +39,111 @@ export default function HeroSection() {
         background: "var(--orange)",
       }} />
 
-      {/* Grille 2 colonnes — stretch pour que les deux colonnes aient la même hauteur */}
+      {/* GRILLE GLOBALE 2x2 */}
       <div className="max-page" style={{
         position: "relative", zIndex: 1,
         width: "100%",
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 60,
-        alignItems: "stretch",
+        gridTemplateColumns: "1fr 1fr", // Deux colonnes égales
+        gridTemplateRows: "1fr auto",   // Ligne 1 (Titre/Image) s'étire, Ligne 2 (Bas) s'adapte
+        columnGap: 60,
       }}>
 
-        {/* ── Colonne GAUCHE — texte principal ── */}
-        {/* display:flex + flexDirection:column + justifyContent:space-between
-            pousse les boutons vers le bas naturellement */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-
-          <div>
-            {/* Status pill */}
-            <div className="f1" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "clamp(20px,3vw,28px)" }}>
-              <span className="blink" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--orange)", display: "inline-block", flexShrink: 0 }} />
-              <span className="label" style={{ fontSize: "clamp(8px,1vw,9px)" }}>
-                Mediterranean Performance Nutrition — System Online
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="d f2" style={{
-              fontSize: "clamp(48px,7vw,110px)",
-              color: "var(--ink)",
-              lineHeight: 0.88,
-            }}>
-              PROTEIN.<br />
-              OLIVE OIL.<br />
-              <span style={{ color: "var(--orange)" }}>RESULTS.</span>
-            </h1>
+        {/* 1. HAUT GAUCHE : Titre */}
+        <div style={{ paddingBottom: "clamp(20px, 3vw, 40px)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <div className="f1" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "clamp(20px,3vw,28px)" }}>
+            <span className="blink" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--orange)", display: "inline-block" }} />
+            <span className="label" style={{ fontSize: "clamp(8px,1vw,9px)" }}>
+              Mediterranean Performance Nutrition — System Online
+            </span>
           </div>
-
-          {/* Description + boutons — poussés en bas par space-between */}
-          <div className="f3" style={{
-            paddingTop: "clamp(20px,2.5vw,28px)",
-            borderTop: "1px solid var(--faint)",
+          <h1 className="d f2" style={{
+            fontSize: "clamp(48px,7vw,110px)",
+            color: "var(--ink)",
+            lineHeight: 0.88,
+            margin: 0
           }}>
-            <p style={{
-              fontFamily: "var(--body)", fontSize: "clamp(14px,1.2vw,15px)",
-              color: "var(--muted)", lineHeight: 1.7, fontWeight: 300, maxWidth: 420,
-              marginBottom: 24,
-            }}>
-              High-protein Mediterranean sauces for athletes who track their macros and refuse to eat bland food.
-              Real ingredients. Sourced from origin.
-            </p>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <Link href="/shop">
-                <button className="btn btn-orange" style={{ border: "none" }}>
-                  <ArrowRight size={13} color="#fff" />Shop Now
-                </button>
-              </Link>
-              <Link href="/science">
-                <button className="btn btn-ghost">Our Science</button>
-              </Link>
-            </div>
-          </div>
-
+            PROTEIN.<br />
+            OLIVE OIL.<br />
+            <span style={{ color: "var(--orange)" }}>RESULTS.</span>
+          </h1>
         </div>
 
-        {/* ── Colonne DROITE — image/vidéo + stats ── */}
-        {/* display:grid avec 2 rangées :
-            - 1fr = l'image prend tout l'espace disponible
-            - auto = les stats prennent juste ce qu'elles ont besoin */}
-        <div style={{
-          display: "grid",
-          gridTemplateRows: "1fr auto",
-          gap: 16,
-        }}>
-
-          {/* Espace image/vidéo — s'étire pour remplir la rangée 1fr */}
+        {/* 2. HAUT DROITE : Image (s'aligne sur la hauteur du titre) */}
+        <div style={{ paddingBottom: "clamp(20px, 3vw, 40px)" }}>
           <div style={{
             background: "rgba(0,0,0,0.04)",
             borderRadius: 4,
             border: "1px dashed var(--faint)",
+            height: "100%", // Remplit toute la cellule de la grille
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "150px",
+            minHeight: "200px"
           }}>
             <p className="label" style={{ color: "var(--faint)" }}>Image / Vidéo</p>
           </div>
+        </div>
 
-          {/* Stats + chips — rangée auto, s'aligne naturellement avec les boutons */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {/* 3. BAS GAUCHE : Description + Boutons (avec le trait) */}
+        <div style={{
+          paddingTop: "clamp(20px, 2.5vw, 28px)",
+          borderTop: "1px solid var(--faint)",
+        }}>
+          <p style={{
+            fontFamily: "var(--body)", fontSize: "clamp(14px,1.2vw,15px)",
+            color: "var(--muted)", lineHeight: 1.7, fontWeight: 300, maxWidth: 420,
+            marginBottom: 24,
+          }}>
+            High-protein Mediterranean sauces for athletes who track their macros and refuse to eat bland food.
+            Real ingredients. Sourced from origin.
+          </p>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <Link href="/shop">
+              <button className="btn btn-orange" style={{ border: "none" }}>
+                <ArrowRight size={13} style={{ marginRight: 8 }} /> Shop Now
+              </button>
+            </Link>
+            <Link href="/science">
+              <button className="btn btn-ghost">Our Science</button>
+            </Link>
+          </div>
+        </div>
 
-            {/* Stats */}
-            <div className="f4" style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4,auto)",
-              paddingTop: 12,
-              borderTop: "1px solid var(--faint)",
-              alignItems: "start",
-            }}>
-              {STATS.map((s, i) => (
-                <div key={i} style={{ display: "contents" }}>
-                  <div style={{ paddingRight: 16, paddingLeft: i === 0 ? 0 : 16 }}>
-                    <p className="d" style={{ fontSize: "clamp(20px,2vw,28px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>
-                      {s.value}
-                    </p>
-                    <p className="label" style={{ marginTop: 4, fontSize: "clamp(7px,0.7vw,8px)", lineHeight: 1.4 }}>
-                      {s.label}
-                    </p>
-                  </div>
-                  {i < 3 && <div className="stat-sep" />}
+        {/* 4. BAS DROITE : Stats + Chips (avec le trait aligné) */}
+        <div style={{
+          paddingTop: "clamp(20px, 2.5vw, 28px)",
+          borderTop: "1px solid var(--faint)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+        }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4,auto)",
+            alignItems: "start",
+          }}>
+            {STATS.map((s, i) => (
+              <div key={i} style={{ display: "contents" }}>
+                <div style={{ paddingRight: 16, paddingLeft: i === 0 ? 0 : 16 }}>
+                  <p className="d" style={{ fontSize: "clamp(20px,2vw,28px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>
+                    {s.value}
+                  </p>
+                  <p className="label" style={{ marginTop: 4, fontSize: "clamp(7px,0.7vw,8px)", lineHeight: 1.4 }}>
+                    {s.label}
+                  </p>
                 </div>
-              ))}
-            </div>
+                {i < 3 && <div style={{ width: 1, height: 30, background: "var(--faint)", alignSelf: "center" }} />}
+              </div>
+            ))}
+          </div>
 
-            {/* Chips sport */}
-            <div className="f5" style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-              <Activity size={12} color="var(--orange)" />
-              <p className="label" style={{ fontSize: "clamp(7.5px,0.8vw,8px)" }}>Optimised for:</p>
-              {TRAINING_CHIPS.map((t) => (
-                <span key={t} className="chip chip-outline" style={{ fontSize: 7.5 }}>{t}</span>
-              ))}
-            </div>
-
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+            <Activity size={12} color="var(--orange)" />
+            <p className="label" style={{ fontSize: "clamp(7.5px,0.8vw,8px)" }}>Optimised for:</p>
+            {TRAINING_CHIPS.map((t) => (
+              <span key={t} className="chip chip-outline" style={{ fontSize: 7.5 }}>{t}</span>
+            ))}
           </div>
         </div>
 
