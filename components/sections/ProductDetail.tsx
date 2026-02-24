@@ -1,32 +1,31 @@
 "use client";
 
-// components/sections/ProductDetail.tsx
-// Affichage complet d'un produit individuel.
-
+import { useState } from "react";
+import Link from "next/link";
 import { Product } from "@/lib/products";
 import MacroGrid from "@/components/MacroGrid";
 import { useCart } from "@/context/CartContext";
 import { ShoppingBag, Activity, ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 type Props = { product: Product };
 
 export default function ProductDetail({ product: p }: Props) {
   const { addToCart } = useCart();
+  const [activeImg, setActiveImg] = useState(0);
 
   return (
     <section style={{
-      paddingTop: "clamp(100px,12vw,140px)",
       padding: "clamp(100px,12vw,140px) clamp(20px,4vw,40px) clamp(80px,8vw,96px)",
       maxWidth: 1400,
       margin: "0 auto",
     }}>
+
       {/* Breadcrumb */}
       <Link href="/shop" style={{ textDecoration: "none" }}>
         <span style={{
           fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".14em",
           textTransform: "uppercase", color: "var(--muted)",
-          display: "flex", alignItems: "center", gap: 6, marginBottom: 36,
+          display: "inline-flex", alignItems: "center", gap: 6, marginBottom: 40,
         }}>
           <ArrowLeft size={11} /> Back to shop
         </span>
@@ -40,24 +39,54 @@ export default function ProductDetail({ product: p }: Props) {
         alignItems: "start",
       }}>
 
-        {/* Image */}
-        <div style={{
-          borderRadius: 4, overflow: "hidden",
-          height: "clamp(300px,50vw,520px)",
-          background: "var(--ink)",
-        }}>
-          <img
-            src={p.img}
-            alt={p.name}
-            style={{
-              width: "100%", height: "100%", objectFit: "cover",
-              filter: "brightness(.5) saturate(.7)",
-            }}
-          />
+        {/* ── Colonne GAUCHE — Galerie ── */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+
+          {/* Photo principale */}
+          <div style={{
+            borderRadius: 4, overflow: "hidden",
+            height: "clamp(300px,45vw,480px)",
+            background: "var(--ink)",
+          }}>
+            <img
+              src={p.images[activeImg]}
+              alt={p.name}
+              style={{
+                width: "100%", height: "100%", objectFit: "cover",
+                transition: "opacity .3s ease",
+              }}
+            />
+          </div>
+
+          {/* Miniatures */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
+            {p.images.map((img, i) => (
+              <div
+                key={i}
+                onClick={() => setActiveImg(i)}
+                style={{
+                  height: 80, borderRadius: 4, overflow: "hidden",
+                  border: activeImg === i ? "2px solid var(--orange)" : "2px solid transparent",
+                  cursor: "pointer", transition: "border .2s",
+                }}
+              >
+                <img
+                  src={img}
+                  alt={`${p.name} ${i + 1}`}
+                  style={{
+                    width: "100%", height: "100%", objectFit: "cover",
+                    opacity: activeImg === i ? 1 : 0.6,
+                    transition: "opacity .2s",
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Infos */}
+        {/* ── Colonne DROITE — Infos ── */}
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
           {/* Code + tag */}
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <span className="label" style={{ color: "var(--muted)" }}>{p.code}</span>
@@ -65,7 +94,7 @@ export default function ProductDetail({ product: p }: Props) {
           </div>
 
           {/* Nom */}
-          <h1 className="d" style={{ fontSize: "clamp(44px,6vw,80px)", color: "var(--ink)" }}>
+          <h1 className="d" style={{ fontSize: "clamp(44px,6vw,80px)", color: "var(--ink)", lineHeight: 0.92 }}>
             {p.name}
           </h1>
           <p className="label" style={{ color: "var(--muted)" }}>{p.sub}</p>
@@ -104,6 +133,7 @@ export default function ProductDetail({ product: p }: Props) {
             <ShoppingBag size={13} color="#fff" />
             Add to Basket — {p.price.toFixed(2)}€
           </button>
+
         </div>
       </div>
     </section>
