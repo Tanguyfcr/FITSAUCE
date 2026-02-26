@@ -56,13 +56,12 @@ export default function SciencePage() {
         position: "relative",
         overflow: "hidden",
         background: "var(--ink)",
-        maxWidth: "100%",
       }}>
 
         {/* Grid background */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px)",
+          backgroundImage: "linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px)",
           backgroundSize: "60px 60px",
         }} />
 
@@ -71,12 +70,12 @@ export default function SciencePage() {
 
         <div style={{ position: "relative", zIndex: 1, maxWidth: 1400, margin: "0 auto", width: "100%" }}>
           <p className="label" style={{ color: "var(--orange)", marginBottom: 24 }}>// The Science</p>
-          <h1 className="d" style={{ fontSize: "clamp(64px,10vw,160px)", color: "#fff", lineHeight: 0.88, marginBottom: 40 }}>
+          <h1 className="d" style={{ fontSize: "clamp(64px,10vw,160px)", color: "var(--ink)", lineHeight: 0.88, marginBottom: 40 }}>
             FOOD IS<br />
             TECHNOLOGY.<br />
             <span style={{ color: "var(--orange)" }}>TREAT IT<br />LIKE ONE.</span>
           </h1>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 40, maxWidth: 800, paddingTop: 48, borderTop: "1px solid rgba(255,255,255,.1)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 40, maxWidth: 800, paddingTop: 48, borderTop: "1px solid var(--faint)" }}>
             {[
               { v: "62g", l: "Max protein / serving" },
               { v: "0g",  l: "Added sugar" },
@@ -84,8 +83,8 @@ export default function SciencePage() {
               { v: "3×",  l: "Faster recovery" },
             ].map((s, i) => (
               <div key={i}>
-                <p className="d" style={{ fontSize: "clamp(36px,4vw,52px)", color: i === 0 ? "var(--orange)" : "#fff", lineHeight: 1 }}>{s.v}</p>
-                <p className="label" style={{ color: "rgba(255,255,255,.35)", marginTop: 6 }}>{s.l}</p>
+                <p className="d" style={{ fontSize: "clamp(36px,4vw,52px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>{s.v}</p>
+                <p className="label" style={{ color: "var(--muted)", marginTop: 6 }}>{s.l}</p>
               </div>
             ))}
           </div>
@@ -109,17 +108,12 @@ export default function SciencePage() {
               borderTop: "1px solid var(--faint)",
               alignItems: "start",
             }}>
-              {/* Number */}
               <span style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, color: "var(--orange)", letterSpacing: ".06em", paddingTop: 4 }}>{p.code}</span>
-
-              {/* Content */}
               <div>
                 <p style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 8 }}>{p.subtitle}</p>
                 <h3 className="d" style={{ fontSize: "clamp(28px,3.5vw,48px)", color: "var(--ink)", marginBottom: 16, lineHeight: 0.95 }}>{p.title.toUpperCase()}</h3>
                 <p style={{ fontFamily: "var(--body)", fontSize: 15, color: "var(--muted)", lineHeight: 1.75, fontWeight: 300, maxWidth: 580 }}>{p.body}</p>
               </div>
-
-              {/* Stat */}
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 <p className="d" style={{ fontSize: "clamp(40px,5vw,72px)", color: "var(--orange)", lineHeight: 1 }}>{p.stat}</p>
                 <p className="label" style={{ fontSize: 8, marginTop: 4 }}>{p.statLabel}</p>
