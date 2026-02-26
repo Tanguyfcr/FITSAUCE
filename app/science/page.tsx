@@ -61,7 +61,7 @@ export default function SciencePage() {
         {/* Grid background */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px)",
+          backgroundImage: "linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px)",
           backgroundSize: "60px 60px",
         }} />
 
@@ -69,13 +69,13 @@ export default function SciencePage() {
         <div style={{ position: "absolute", top: 0, left: 0, width: "clamp(3px,0.4vw,4px)", height: "40%", background: "var(--orange)" }} />
 
         <div style={{ position: "relative", zIndex: 1, maxWidth: 1400, margin: "0 auto", width: "100%" }}>
-          <p className="label" style={{ color: "var(--orange)", marginBottom: 24 }}>// The Science</p>
-          <h1 className="d" style={{ fontSize: "clamp(64px,10vw,160px)", color: "var(--ink)", lineHeight: 0.88, marginBottom: 40 }}>
-            FOOD IS<br />
-            TECHNOLOGY.<br />
-            <span style={{ color: "var(--orange)" }}>TREAT IT<br />LIKE ONE.</span>
+          <p className="label" style={{ color: "var(--orange)", marginBottom: 24 }}>// Built on evidence</p>
+          <h1 className="d" style={{ fontSize: "clamp(64px,10vw,160px)", color: "#fff", lineHeight: 0.88, marginBottom: 40 }}>
+            NO LABS.<br />
+            NO SHORTCUTS.<br />
+            <span style={{ color: "var(--orange)" }}>JUST REAL<br />SCIENCE.</span>
           </h1>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 40, maxWidth: 800, paddingTop: 48, borderTop: "1px solid var(--faint)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 40, maxWidth: 800, paddingTop: 48, borderTop: "1px solid rgba(255,255,255,.1)" }}>
             {[
               { v: "62g", l: "Max protein / serving" },
               { v: "0g",  l: "Added sugar" },
@@ -83,8 +83,8 @@ export default function SciencePage() {
               { v: "3×",  l: "Faster recovery" },
             ].map((s, i) => (
               <div key={i}>
-                <p className="d" style={{ fontSize: "clamp(36px,4vw,52px)", color: i === 0 ? "var(--orange)" : "var(--ink)", lineHeight: 1 }}>{s.v}</p>
-                <p className="label" style={{ color: "var(--muted)", marginTop: 6 }}>{s.l}</p>
+                <p className="d" style={{ fontSize: "clamp(36px,4vw,52px)", color: i === 0 ? "var(--orange)" : "#fff", lineHeight: 1 }}>{s.v}</p>
+                <p className="label" style={{ color: "rgba(255,255,255,.4)", marginTop: 6 }}>{s.l}</p>
               </div>
             ))}
           </div>

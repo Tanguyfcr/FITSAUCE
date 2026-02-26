@@ -40,7 +40,7 @@ body { font-family: var(--body); background: var(--bg); color: var(--ink); overf
 .ticker-inner{display:flex;white-space:nowrap;animation:ticker 30s linear infinite}
 .ticker-inner:hover{animation-play-state:paused}
 
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .3s,border-color .3s,padding .3s}
+.nav{position:fixed;top:36px;left:0;right:0;z-index:100;transition:background .3s,border-color .3s,padding .3s}
 .nav-scrolled{background:rgba(245,244,240,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--faint)}
 
 .btn{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:all .18s ease;cursor:pointer}
