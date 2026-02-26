@@ -105,17 +105,7 @@ export default function ProductDetail({ product: p, allProducts }: Props) {
           </span>
         </Link>
 
-        {/* Shipping banner */}
-        <div style={{
-          background: "var(--ink)", borderRadius: 4, padding: "12px 20px",
-          display: "flex", alignItems: "center", gap: 10, marginBottom: 40,
-        }}>
-          <Truck size={14} color="var(--orange)" />
-          <span style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", color: "rgba(255,255,255,.7)" }}>
-            Shipping <strong style={{ color: "#fff" }}>€3.00</strong> · Free over <strong style={{ color: "#fff" }}>€40</strong> · Delivered in <strong style={{ color: "#fff" }}>3–5 business days</strong>
-          </span>
-        </div>
-
+   
         {/* Main layout */}
         <div style={{
           display: "grid",
@@ -258,21 +248,38 @@ export default function ProductDetail({ product: p, allProducts }: Props) {
 
 {/* EU Legal Nutrition Table */}
 <div style={{ marginTop: "clamp(48px,6vw,64px)" }}>
-  <p className="label" style={{ marginBottom: 16 }}>Nutritional Declaration (per 100g)</p>
-  <div style={{ border: "1px solid var(--faint)", borderRadius: 4, overflow: "hidden" }}>
-    <div style={{ background: "var(--ink)", padding: "10px 16px", display: "flex", justifyContent: "space-between" }}>
-      <span style={{ fontFamily: "var(--mono)", fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 700, color: "#fff" }}>Nutrient</span>
-      <span style={{ fontFamily: "var(--mono)", fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 700, color: "#fff" }}>Per 100g</span>
+  <p className="label" style={{ color: "var(--orange)", marginBottom: 16 }}>// Nutritional Declaration · per 100g</p>
+  <div style={{ border: "1.5px solid var(--ink)", borderRadius: 4, overflow: "hidden" }}>
+    <div style={{ background: "var(--ink)", padding: "12px 20px", display: "flex", justifyContent: "space-between" }}>
+      <span className="label" style={{ color: "rgba(255,255,255,.4)" }}>Nutrient</span>
+      <span className="label" style={{ color: "rgba(255,255,255,.4)" }}>Per 100g</span>
     </div>
     {extra?.nutrition100g.map((row, i) => (
       <div key={i}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", background: i % 2 === 0 ? "var(--white)" : "var(--bg)", borderTop: "1px solid var(--faint)" }}>
-          <span style={{ fontFamily: "var(--body)", fontSize: 13, fontWeight: 500, color: "var(--ink)" }}>{row.label}</span>
-          <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink)" }}>{row.value}</span>
+        <div style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          padding: "13px 20px",
+          background: row.label === "Protein" ? "#fff8f0" : "var(--white)",
+          borderTop: "1px solid var(--faint)",
+        }}>
+          <span style={{
+            fontFamily: "var(--body)", fontSize: 14,
+            fontWeight: row.label === "Protein" ? 700 : 500,
+            color: row.label === "Protein" ? "var(--orange)" : "var(--ink)",
+          }}>{row.label}</span>
+          <span style={{
+            fontFamily: "var(--mono)", fontSize: 13, fontWeight: 700,
+            color: row.label === "Protein" ? "var(--orange)" : "var(--ink)",
+          }}>{row.value}</span>
         </div>
         {row.sub && (
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 16px 7px 32px", background: i % 2 === 0 ? "var(--white)" : "var(--bg)", borderTop: "1px solid var(--faint)" }}>
-            <span style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--muted)" }}>of which {row.sub.label}</span>
+          <div style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            padding: "8px 20px 8px 36px",
+            background: "var(--bg)",
+            borderTop: "1px solid var(--faint)",
+          }}>
+            <span style={{ fontFamily: "var(--body)", fontSize: 12, color: "var(--muted)", fontStyle: "italic" }}>of which {row.sub.label}</span>
             <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)" }}>{row.sub.value}</span>
           </div>
         )}

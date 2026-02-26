@@ -1,12 +1,8 @@
 "use client";
 
-// components/Nav.tsx
-// Barre de navigation fixe en haut. Devient opaque au scroll.
-// Contient : logo, liens desktop, bouton panier, menu hamburger mobile.
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, Truck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 const NAV_LINKS = [
@@ -18,17 +14,15 @@ const NAV_LINKS = [
 
 export default function Nav() {
   const { cartQty, setCartOpen } = useCart();
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Détecte si l'utilisateur a scrollé
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Bloque le scroll du body quand le menu mobile est ouvert
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -36,10 +30,23 @@ export default function Nav() {
 
   return (
     <>
+      {/* ── Shipping bar ── */}
+      <div style={{
+        background: "var(--ink)",
+        padding: "14px clamp(40px,4vw,60px)",
+        display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 101,
+      }}>
+        <Truck size={12} color="var(--orange)" />
+        <span style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", color: "rgba(255,255,255,.6)" }}>
+          Shipping <strong style={{ color: "#fff" }}>€3.00</strong> · Free over <strong style={{ color: "#fff" }}>€40</strong> · Delivered in <strong style={{ color: "#fff" }}>3–5 business days</strong>
+        </span>
+      </div>
+
       {/* ── Nav principale ── */}
       <nav
         className={`nav ${scrolled ? "nav-scrolled" : ""}`}
-        style={{ padding: scrolled ? "14px 0" : "24px 0" }}
+        style={{ padding: scrolled ? "14px 0" : "24px 0", top: 36 }}
       >
         <div style={{
           maxWidth: "100%",
@@ -132,7 +139,6 @@ export default function Nav() {
       {/* ── Menu mobile plein écran ── */}
       {menuOpen && (
         <div className="mobile-menu">
-          {/* En-tête du menu */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 48 }}>
             <span className="d" style={{ fontSize: 20, color: "#fff", letterSpacing: ".04em" }}>
               FITSAUCE<span style={{ color: "var(--orange)" }}>.</span>
@@ -145,7 +151,6 @@ export default function Nav() {
             </button>
           </div>
 
-          {/* Liens */}
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             {NAV_LINKS.map((link) => (
               <Link
